@@ -7,7 +7,7 @@
 # Ejercicio 2
 # Crear una función read_data que reciba el nombre de un csv y devuleva un diccionario con cada muestra del csv,
 # donde la clave de cada subdiccionario irá incrementando desdde dato1. Si hay alguna muestra con un dato vacío no
-# se insertará en el diccionario. Si el fichero tiene menos de 10 líneas con valor en todos los atributos, devolverá un error de tipo ValueError
+# se insertará en el diccionario.
 
 def read_data(wine_quality):
     import csv
@@ -15,17 +15,10 @@ def read_data(wine_quality):
         lectorFichero = csv.reader(f)
         next(lectorFichero)
         data = {}
-        if len(list(lectorFichero)) < 10:
-            raise ValueError('El fichero no tiene 10 lineas con valores')
         for row in lectorFichero:
             if row[0] != '':
                 data['dato'+str(len(data)+1)] = {'type': row[0], 'fixed acidity': row[1], 'volatile acidity': row[2], 'citric acid': row[3], 'residual sugar': row[4], 'chlorides': row[5], 'free sulfur dioxide': row[6], 'total sulfur dioxide': row[7], 'density': row[8], 'pH': row[9], 'sulphates': row[10], 'alcohol': row[11], 'quality': row[12]}
     return data
-
-"""
-mostramos por pantalla el diccionario devuelto
-print(read_data('winequality.csv'))
-"""
 
 # Ejercicio 3
 # Crear una funcion llamada split que reciba un diccionatio como el devuelto en read_data y devuelva dos diccionarios.
@@ -43,11 +36,6 @@ def split(data):
             data_red[key] = {'fixed acidity': data[key]['fixed acidity'], 'volatile acidity': data[key]['volatile acidity'], 'citric acid': data[key]['citric acid'], 'residual sugar': data[key]['residual sugar'], 'chlorides': data[key]['chlorides'], 'free sulfur dioxide': data[key]['free sulfur dioxide'], 'total sulfur dioxide': data[key]['total sulfur dioxide'], 'density': data[key]['density'], 'pH': data[key]['pH'], 'sulphates': data[key]['sulphates'], 'alcohol': data[key]['alcohol'], 'quality': data[key]['quality']}
     return data_white, data_red
 
-"""
-mostramos por pantalla los diccionarios devueltos por la funcion split
-print(split(read_data('winequality.csv'))[0])
-"""
-
 # Ejercicio 4
 # Crear una funcion llamada reduce que reciba un diccionario como el devuelto en la funcion split y un string que corresponda el nombre de un atributo,
 # la funcion debe devolver una lista con los valores del atributo.
@@ -62,11 +50,6 @@ def reduce(data, atributo):
             raise ValueError('El atributo introducido no existe')
     return lista
 
-"""
-mostramos por pantalla la lista devuelta por la funcion reduce
-print(reduce(split(read_data('winequality.csv'))[0], 'alcohol'))
-"""
-
 # Ejercicio 5
 # Crea una funcion Silhouette que reciba dos listas como las devueltas en reduce y devuelva,
 # el coeficiente de Silhouette de la primera de las listas.
@@ -79,4 +62,5 @@ def silhouette(l1, l2):
     b = 0
 
     for i in l1:
-        aux = sqrt(abs((i-l1[0])*(i-l1[0])))
+        aux = sqrt(abs(pow(i-l1[0])))
+        a += aux
