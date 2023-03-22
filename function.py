@@ -17,6 +17,14 @@ def read_data(wine_quality):
         data = {}
         for row in lectorFichero:
             if row[0] != '':
-                data['dato'+str(len(data)+1)] = {'fixed acidity': row[0], 'volatile acidity': row[1], 'citric acid': row[2], 'residual sugar': row[3], 'chlorides': row[4], 'free sulfur dioxide': row[5], 'total sulfur dioxide': row[6], 'density': row[7], 'pH': row[8], 'sulphates': row[9], 'alcohol': row[10], 'quality': row[11]}
+                data['dato'+str(len(data)+1)] = {'type': row[0], 'fixed acidity': row[1], 'volatile acidity': row[2], 'citric acid': row[3], 'residual sugar': row[4], 'chlorides': row[5], 'free sulfur dioxide': row[6], 'total sulfur dioxide': row[7], 'density': row[8], 'pH': row[9], 'sulphates': row[10], 'alcohol': row[11], 'quality': row[12]}
     return data
-    
+
+"""
+mostramos por pantalla el diccionario devuelto
+print(read_data('winequality.csv'))
+"""
+
+# Funcion 2
+# Crear una funcion llamada split que reciba un diccionatio como el devuelto en read_data y devuelva dos diccionarios.
+# En el primero se muestran 
