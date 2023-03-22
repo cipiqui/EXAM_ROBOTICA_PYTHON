@@ -7,14 +7,16 @@
 # Ejercicio 2
 # Crear una función read_data que reciba el nombre de un csv y devuleva un diccionario con cada muestra del csv,
 # donde la clave de cada subdiccionario irá incrementando desdde dato1. Si hay alguna muestra con un dato vacío no
-# se insertará en el diccionario
+# se insertará en el diccionario. Si el fichero tiene menos de 10 líneas con valor en todos los atributos, devolverá un error de tipo ValueError
 
 def read_data(wine_quality):
     import csv
     with open(wine_quality) as f:
         lectorFichero = csv.reader(f)
-        cabecera = next(lectorFichero)
+        next(lectorFichero)
         data = {}
+        if len(list(lectorFichero)) < 10:
+            raise ValueError('El fichero no tiene 10 lineas con valores')
         for row in lectorFichero:
             if row[0] != '':
                 data['dato'+str(len(data)+1)] = {'type': row[0], 'fixed acidity': row[1], 'volatile acidity': row[2], 'citric acid': row[3], 'residual sugar': row[4], 'chlorides': row[5], 'free sulfur dioxide': row[6], 'total sulfur dioxide': row[7], 'density': row[8], 'pH': row[9], 'sulphates': row[10], 'alcohol': row[11], 'quality': row[12]}
@@ -51,4 +53,21 @@ print(split(read_data('winequality.csv'))[0])
 # la funcion debe devolver una lista con los valores del atributo.
 # Si el atributo no existe, devolverá un error de tipo ValueError
 
-def reduce():
+def reduce(data, atributo):
+    lista = []
+    for key in data:
+        if atributo in data[key]:
+            lista.append(data[key][atributo])
+        else:
+            raise ValueError('El atributo introducido    no existe')
+    return lista
+
+"""
+mostramos por pantalla la lista devuelta por la funcion reduce
+print(reduce(split(read_data('winequality.csv'))[0], 'alcohol'))
+"""
+
+# Ejercicio 5
+# Crea una funcion Silhouette que reciba dos listas como las devueltas en reduce y devuelva,
+# el coeficiente de Silhouette de la primera de las listas.
+
