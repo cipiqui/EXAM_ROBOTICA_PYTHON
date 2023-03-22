@@ -59,7 +59,7 @@ def reduce(data, atributo):
         if atributo in data[key]:
             lista.append(data[key][atributo])
         else:
-            raise ValueError('El atributo introducido    no existe')
+            raise ValueError('El atributo introducido no existe')
     return lista
 
 """
@@ -71,3 +71,12 @@ print(reduce(split(read_data('winequality.csv'))[0], 'alcohol'))
 # Crea una funcion Silhouette que reciba dos listas como las devueltas en reduce y devuelva,
 # el coeficiente de Silhouette de la primera de las listas.
 
+from math import sqrt
+
+def silhouette(l1, l2):
+
+    a = 0
+    b = 0
+
+    for i in l1:
+        aux = sqrt(abs((i-l1[0])*(i-l1[0])))
